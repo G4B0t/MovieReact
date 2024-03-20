@@ -1,0 +1,185 @@
+.demo {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.panel {
+  background: linear-gradient(to right, #2980b9, #2c3e50);
+  padding: 0;
+  border-radius: 10px;
+  border: none;
+  box-shadow:
+    0 0 0 5px rgba(0, 0, 0, 0.05),
+    0 0 0 10px rgba(0, 0, 0, 0.05);
+  width: 80%;
+  margin: 0 auto;
+}
+
+.panel .panel-heading {
+  padding: 20px 15px;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+}
+
+.panel .panel-heading .title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 500;
+  text-transform: capitalize;
+  line-height: 40px;
+  margin: 0;
+}
+
+.panel .panel-heading .btn {
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  font-size: 16px;
+  text-transform: capitalize;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  transition: all 0.3s ease 0s;
+}
+
+.panel .panel-heading .btn:hover {
+  color: #fff;
+  text-shadow: 3px 3px rgba(255, 255, 255, 0.2);
+}
+
+.panel .panel-heading .form-control {
+  color: #fff;
+  background-color: transparent;
+  width: 35%;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+}
+
+.panel .panel-heading .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  outline: none;
+}
+
+.panel .panel-heading .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.panel .panel-body {
+  padding: 0;
+}
+
+.panel .panel-body .table thead tr th {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 12px;
+  border: none;
+  border-right: 1px solid #000; /* Línea vertical */
+}
+
+.panel .panel-body .table tbody tr td {
+  color: #000;
+  font-size: 15px;
+  padding: 10px 12px;
+  vertical-align: middle;
+  border: none;
+  border-right: 1px solid #000; /* Línea vertical */
+  border-bottom: 1px solid #000; /* Línea horizontal */
+}
+
+.panel .panel-body .table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.panel .panel-body .table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.panel .panel-body .table tbody .action-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.panel .panel-footer {
+  color: #fff;
+  background-color: transparent;
+  padding: 15px;
+  border: none;
+}
+
+.panel .panel-footer .col {
+  line-height: 35px;
+}
+
+.pagination_rounded {
+    display: inline-block;
+    margin-left: 400px;
+    margin-top: 30px;
+  }
+  
+  .pagination_rounded ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .pagination_rounded li:first-child {
+    margin-left: 0px;
+  }
+  
+  .pagination_rounded ul li {
+    float: left;
+    margin-left: 20px;
+  }
+  
+  .pagination_rounded ul li a:hover {
+    background: #4285f4;
+    color: #fff;
+    border: 1px solid #4285f4;
+  }
+  
+  a:link {
+    text-decoration: none;
+  }
+  
+  .pagination_rounded .prev {
+    margin-left: 0px;
+    border-radius: 35px;
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+  }
+  
+  .pagination_rounded ul li a {
+    float: left;
+    color: #4285f4;
+    border-radius: 50%;
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .pagination_rounded .prev i {
+    margin-right: 10px;
+  }
+  
+  .pagination_rounded .next {
+    border-radius: 35px;
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+  }
+  
+  .visible-xs {
+    display: none!important;
+  }
+  
