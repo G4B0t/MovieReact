@@ -11,7 +11,7 @@ import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DebouncedInput from "./DebouncedInput";
 
-const TanStackTable = ({ data, columns, new_data }) => {
+const TanStackTable = ({ data, columns, new_data, title }) => {
   const [globalFilter, setGlobalFilter] = useState("");
 
   const table = useReactTable({
@@ -32,7 +32,7 @@ const TanStackTable = ({ data, columns, new_data }) => {
     <div className="demo">
       <div className="panel">
         <div className="panel-heading">
-          <h3 className="title">Movies</h3>
+          <h3 className="title">{title}</h3>
           <div className="btn_group">
             <FontAwesomeIcon icon={faSearch} />
             <DebouncedInput

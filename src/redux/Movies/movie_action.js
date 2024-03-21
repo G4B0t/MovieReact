@@ -51,7 +51,7 @@ export const movie_get_data = () => {
 
 export const movie_update_data = (body) => {
   return (dispatch) => {
-    axios.post();
+    axios.update(BASE_API_URL);
   };
 };
 
@@ -61,7 +61,9 @@ export const movie_create_data = () => {
   return (dispatch, getState) => {
     const state = getState();
     const { payload } = state.movie.payload;
-
-    axios.post();
+    const data = JSON.stringify(payload);
+    axios.post(BASE_API_URL, data).then((response) => {
+      console.log(response);
+    });
   };
 };

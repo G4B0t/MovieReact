@@ -9,7 +9,7 @@ const defaultState = {
   data: [
     {
       id: 1,
-      img: "https://images.squarespace-cdn.com/content/v1/5c75dfa97d0c9166551f52b1/9351f4e2-94f9-42e2-81df-003d5fe7b8e0/9964546b0ba1f6e14a6045e34b341f8ca2a3569752c5afed95b89682fcde1a68._RI_V_TTW_.jpg",
+      img: "https://ichef.bbci.co.uk/images/ic/640x360/p0dr7p6t.jpg",
       title: "The Shawshank Redemption",
       releaseDate: new Date(1994, 9, 14),
       actors: [
@@ -37,6 +37,9 @@ const defaultState = {
     },
   ],
   movie_list: [],
+  isloading: false,
+  isloaded: false,
+  error: null,
   payload: {
     title: "",
     releaseDate: "",
@@ -51,6 +54,7 @@ const movie_reducer = (state = defaultState, action = null) => {
       return {
         ...state,
         movie_list: list.data,
+        isloaded: true,
       };
     }
     case MOVIE_TITLE_CHANGE:

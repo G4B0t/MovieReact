@@ -26,7 +26,12 @@ const Ratings = () => {
 
     return (
         <div className="pt-4 min-h-screen bg-gray-900">
-            <TanStackTable className="TanStackTable" data={data} columns={columns}/>
+            <TanStackTable 
+                className="TanStackTable" 
+                data={data} 
+                columns={columns}
+                title="Ratings"
+            />
         </div>
     );
 }

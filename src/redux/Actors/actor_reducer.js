@@ -1,3 +1,5 @@
+import { ACTOR_DATA_RECEIVED } from "./actor_action";
+
 const defaultState = {
   data: [
     {
@@ -26,9 +28,26 @@ const defaultState = {
       movieId: 1,
     },
   ],
+  actor_list: [],
+  payload: {
+    name: "",
+    movieId: 0,
+  },
 };
+
 const actor_reducer = (state = defaultState, action = null) => {
   switch (action.type) {
+    case ACTOR_DATA_RECEIVED: {
+      const data = action.payload;
+      const reducedArray = [];
+      for (let i = 0; i < 1000; i++) {
+        reducedArray.push(data[i]);
+      }
+      return {
+        ...state,
+        actor_list: reducedArray,
+      };
+    }
     default:
       return state;
   }

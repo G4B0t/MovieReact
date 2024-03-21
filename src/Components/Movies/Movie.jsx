@@ -97,7 +97,13 @@ const Movies = () => {
 
     return (
         <div className="pt-4 min-h-screen bg-gray-900">
-            <TanStackTable className="TanStackTable" data={data} columns={columns} new_data = { create_new_movie }/>
+            <TanStackTable 
+                className="TanStackTable" 
+                data={data} 
+                columns={columns} 
+                new_data = { create_new_movie }
+                title = "Movies"
+            />
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>Create New Movie</Modal.Title>
