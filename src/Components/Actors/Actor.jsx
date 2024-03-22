@@ -90,7 +90,7 @@ const Actors = () => {
             />
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Create New Movie</Modal.Title>
+                <Modal.Title>Create New Actor</Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
                         <ActorModal data={data}/>

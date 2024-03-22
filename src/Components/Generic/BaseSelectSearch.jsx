@@ -12,6 +12,7 @@ const BaseSelectSearch = ({ options, onChange, value, width }) => {
         <Select
           options={options}
           placeholder="Select movie..."
+          value={value}
           defaultValue={selected}
           onChange={(value) => onChangeSelect(value)}
           isSearchable

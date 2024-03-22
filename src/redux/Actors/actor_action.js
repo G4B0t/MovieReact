@@ -28,3 +28,13 @@ export const actor_get_data = () => {
     });
   };
 };
+
+export const actor_update_data = () => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const actor = state.actors.payload;
+    axios.update(BASE_API_URL, actor).then((response) => {
+      console.log(response);
+    });
+  };
+};

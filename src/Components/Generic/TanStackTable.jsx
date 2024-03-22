@@ -5,6 +5,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
+  ColumnSizing,
 } from "@tanstack/react-table";
 import {Button} from 'react-bootstrap'; 
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +24,7 @@ const TanStackTable = ({ data, columns, new_data, title }) => {
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    ColumnSizing,
   });
   const addNew = () => {
     new_data(true);

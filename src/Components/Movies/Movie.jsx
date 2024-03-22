@@ -12,7 +12,7 @@ import {
     movie_actor_change,
     movie_averageRating_change,
 } from "../../redux/Movies/movie_action";
-import MovieModalCreate from "./MovieModalCreate";
+import MovieModal from "./MovieModal";
 
 const formatDate = (date) => {
     const year = date.getFullYear();
@@ -25,10 +25,12 @@ const formatDate = (date) => {
 const Movies = () => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
+    const [data, setData] = useState(null);
+    const [btnName, setBtnName] = useState('Save New');
     const movies = useSelector((state) => state.movie.movie_list);
     const columnHelper = createColumnHelper();
 
-    const data = movies.map( movie => {
+    const list = movies.map( movie => {
         const stringDate = formatDate((new Date(movie.releaseDate)));
         return Object.assign({}, movie, {
             releaseDate: stringDate,
@@ -38,8 +40,11 @@ const Movies = () => {
     const deleteMovie = () => {
 
     }
-    const updateMovie = (row) => {
-        console.log(row)
+    const updateMovie = (row_id) => {
+        const update_data = movies.find((movie) => movie.id === row_id)
+        setData(update_data);
+        setBtnName('Save Changes')
+        setShow(true);
     }
     const create_new_movie = () => {
         setShow(true)
@@ -49,7 +54,8 @@ const Movies = () => {
         dispatch(movie_title_change(''));
         dispatch(movie_releaseDate_change(''));
         dispatch(movie_averageRating_change(''));
-
+        setData(null);
+        setBtnName('Save New')
         setShow(false);
     }
     const onCreate = () => {
@@ -99,7 +105,7 @@ const Movies = () => {
         <div className="pt-4 min-h-screen bg-gray-900">
             <TanStackTable 
                 className="TanStackTable" 
-                data={data} 
+                data={list} 
                 columns={columns} 
                 new_data = { create_new_movie }
                 title = "Movies"
@@ -109,14 +115,14 @@ const Movies = () => {
                 <Modal.Title>Create New Movie</Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
-                        <MovieModalCreate />
+                        <MovieModal data={data}/>
                     </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
                 <Button variant="primary" onClick={onCreate}>
-                    Save Changes
+                    {btnName} 
                 </Button>
                 </Modal.Footer>
             </Modal>
