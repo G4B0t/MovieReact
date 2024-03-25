@@ -58,7 +58,7 @@ const MovieModal = ({data}) => {
           type="text"
           placeholder="insert movie actors..."
           defaultValue={movie_actors}
-          onChange={onChangeActor}
+          onChange={(e) => onChangeActor(e.target.value)}
           maxLength="200"
           style={{ border: "1px solid gray" }}
           aria-label="Default"

@@ -8,6 +8,8 @@ export const MOVIE_TITLE_CHANGE = "MOVIE_TITLE_CHANGE";
 export const MOVIE_ACTOR_CHANGE = "MOVIE_ACTOR_CHANGE";
 export const MOVIE_AVERAGE_RATING_CHANGE = "MOVIE_AVERAGE_RATING_CHANGE";
 export const MOVIE_RELEASE_DATE_CHANGE = "MOVIE_RELEASE_DATE_CHANGE";
+export const MOVIE_ADD_DATA_RECEIVED = "MOVIE_ADD_DATA_RECEIVED";
+export const MOVIE_ADD_REJECTED = "MOVIE_ADD_REJECTED";
 
 const BASE_API_URL = "https://localhost:7239/api/Movies";
 
@@ -42,9 +44,9 @@ const movie_data_received = (data) => ({
 
 export const movie_get_data = () => {
   return (dispatch) => {
-    const uri = BASE_API_URL + "?page=1&pageSize=30";
+    const uri = BASE_API_URL + "?title=Avengers&page=1&pageSize=30";
     axios.get(uri).then((response) => {
-      dispatch(movie_data_received(response.data));
+      dispatch(movie_data_received(response.data.data));
     });
   };
 };
@@ -55,15 +57,50 @@ export const movie_update_data = (body) => {
   };
 };
 
-export const movie_delete_data = () => {};
+export const movie_delete_data = (id) => {
+  return (dispatch) => {
+    const uri = BASE_API_URL + "/" + id;
+    axios.delete(uri).then((response) => {
+      if (response.status === 204) dispatch(movie_get_data());
+    });
+  };
+};
+
+const movie_add_received = (payload) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { movie_list } = state.movie;
+    const stringURL = payload.replace(/ /g, "+");
+    const uri = BASE_API_URL + "?title=" + stringURL + "&page=1&pageSize=30";
+    axios.get(uri).then((response) => {
+      dispatch(movie_data_received([...movie_list, ...response.data.data]));
+    });
+  };
+};
+
+/*const movie_add_rejected = (payload) => ({
+  type: MOVIE_ADD_REJECTED,
+  payload,
+});*/
 
 export const movie_create_data = () => {
   return (dispatch, getState) => {
     const state = getState();
-    const { payload } = state.movie.payload;
-    const data = JSON.stringify(payload);
+    const { payload } = state.movie;
+    const string_names = payload.actors.split(",");
+    const names = string_names.map((actor) => ({ name: actor.trim() }));
+    const data = {
+      title: payload.title,
+      actors: names,
+      releaseDate: payload.releaseDate,
+      ratings: [
+        {
+          stars: payload.averageRating,
+        },
+      ],
+    };
     axios.post(BASE_API_URL, data).then((response) => {
-      console.log(response);
+      dispatch(movie_add_received(payload.title));
     });
   };
 };

@@ -5,6 +5,7 @@ import {
   MOVIE_TITLE_CHANGE,
   MOVIE_AVERAGE_RATING_CHANGE,
 } from "./movie_action";
+
 const defaultState = {
   data: [
     {
@@ -50,10 +51,9 @@ const defaultState = {
 const movie_reducer = (state = defaultState, action = null) => {
   switch (action.type) {
     case MOVIE_DATA_RECEIVED: {
-      const list = action.data;
       return {
         ...state,
-        movie_list: list.data,
+        movie_list: action.data,
         isloaded: true,
       };
     }
