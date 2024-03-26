@@ -8,8 +8,6 @@ export const MOVIE_TITLE_CHANGE = "MOVIE_TITLE_CHANGE";
 export const MOVIE_ACTOR_CHANGE = "MOVIE_ACTOR_CHANGE";
 export const MOVIE_AVERAGE_RATING_CHANGE = "MOVIE_AVERAGE_RATING_CHANGE";
 export const MOVIE_RELEASE_DATE_CHANGE = "MOVIE_RELEASE_DATE_CHANGE";
-export const MOVIE_ADD_DATA_RECEIVED = "MOVIE_ADD_DATA_RECEIVED";
-export const MOVIE_ADD_REJECTED = "MOVIE_ADD_REJECTED";
 
 const BASE_API_URL = "https://localhost:7239/api/Movies";
 
@@ -33,9 +31,9 @@ export const movie_releaseDate_change = (payload) => ({
   payload,
 });
 
-/*const movie_data_requested = () => ({
+const movie_data_requested = () => ({
   type: MOVIE_DATA_REQUESTED,
-});*/
+});
 
 const movie_data_received = (data) => ({
   type: MOVIE_DATA_RECEIVED,
@@ -44,7 +42,8 @@ const movie_data_received = (data) => ({
 
 export const movie_get_data = () => {
   return (dispatch) => {
-    const uri = BASE_API_URL + "?title=Avengers&page=1&pageSize=30";
+    const uri = BASE_API_URL + "?page=1&pageSize=10000"; // title=Avengers&
+    dispatch(movie_data_requested());
     axios.get(uri).then((response) => {
       dispatch(movie_data_received(response.data.data));
     });
@@ -53,7 +52,31 @@ export const movie_get_data = () => {
 
 export const movie_update_data = (body) => {
   return (dispatch) => {
-    axios.update(BASE_API_URL);
+    const string_names = body.actors.split(",");
+    const names = string_names.map((actor) => ({
+      name: actor.trim(),
+      movieId: body.id,
+    }));
+    const data = {
+      id: body.id,
+      title: body.title,
+      actors: names,
+      releaseDate: body.releaseDate,
+      ratings: [
+        {
+          stars: body.averageRating,
+        },
+      ],
+    };
+    const uri = BASE_API_URL + "/" + body.id;
+    axios
+      .put(uri, data)
+      .then((response) => {
+        if (response.status === 204) dispatch(movie_get_data());
+      })
+      .catch((errMsg) => {
+        console.log(errMsg);
+      });
   };
 };
 
@@ -77,11 +100,6 @@ const movie_add_received = (payload) => {
     });
   };
 };
-
-/*const movie_add_rejected = (payload) => ({
-  type: MOVIE_ADD_REJECTED,
-  payload,
-});*/
 
 export const movie_create_data = () => {
   return (dispatch, getState) => {

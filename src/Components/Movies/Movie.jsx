@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {Button, Modal } from 'react-bootstrap'; 
+import { Button, Modal } from 'react-bootstrap'; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import TanStackTable from "../Generic/TanStackTable";
@@ -13,6 +13,7 @@ import {
     movie_averageRating_change,
     movie_create_data,
     movie_delete_data,
+    movie_update_data,
 } from "../../redux/Movies/movie_action";
 import MovieModal from "./MovieModal";
 
@@ -33,6 +34,7 @@ const Movies = () => {
     const [showDelete, setShowDelete] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const movies = useSelector((state) => state.movie.movie_list);
+    const { isloading, isloaded } = useSelector((state) => state.movie);
     const columnHelper = createColumnHelper();
 
     const list = movies.map( movie => {
@@ -59,6 +61,14 @@ const Movies = () => {
             setDeleteId(id);
         }
     }
+
+    const onUpdate = () => {
+        dispatch(movie_update_data(data));
+        setBtnName('Save New');
+        setData(null);        
+        setShow(false);
+    }
+
     const updateMovie = (row_id) => {
         const update_data = movies.find((movie) => movie.id === row_id)
         setData(update_data);
@@ -66,6 +76,7 @@ const Movies = () => {
         setShow(true);
     }
     const create_new_movie = () => {
+        setData(null);
         setShow(true)
     }
 
@@ -94,9 +105,17 @@ const Movies = () => {
         setShow(false);
     }
 
+    const update_add = () => {
+        if(data === null) {
+            onCreate();
+        }else{
+            onUpdate();
+        }
+    }
+
     useEffect(() => {
         dispatch(movie_get_data());
-    }, [dispatch])
+    }, [dispatch]);
 
     const columns = [
         columnHelper.accessor("", {
@@ -141,10 +160,12 @@ const Movies = () => {
                 columns={columns} 
                 new_data = { create_new_movie }
                 title = "Movies"
+                loading={isloading}
+                loaded={isloaded}
             />
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Create New Movie</Modal.Title>
+                <Modal.Title>{data !== null ? 'Update ' : 'Create New '} Movie</Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
                         <MovieModal data={data}/>
@@ -153,7 +174,7 @@ const Movies = () => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={onCreate}>
+                <Button variant="primary" onClick={update_add}>
                     {btnName} 
                 </Button>
                 </Modal.Footer>

@@ -4,6 +4,7 @@ import {
   MOVIE_ACTOR_CHANGE,
   MOVIE_TITLE_CHANGE,
   MOVIE_AVERAGE_RATING_CHANGE,
+  MOVIE_DATA_REQUESTED,
 } from "./movie_action";
 
 const defaultState = {
@@ -50,11 +51,19 @@ const defaultState = {
 };
 const movie_reducer = (state = defaultState, action = null) => {
   switch (action.type) {
+    case MOVIE_DATA_REQUESTED: {
+      return {
+        ...state,
+        isloading: true,
+        isloaded: false,
+      };
+    }
     case MOVIE_DATA_RECEIVED: {
       return {
         ...state,
         movie_list: action.data,
         isloaded: true,
+        isloading: false,
       };
     }
     case MOVIE_TITLE_CHANGE:

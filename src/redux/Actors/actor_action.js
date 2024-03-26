@@ -3,6 +3,7 @@ import axios from "axios";
 export const ACTOR_DATA_RECEIVED = "ACTOR_DATA_RECEIVED";
 export const ACTOR_NAME_CHANGE = "ACTOR_NAME_CHANGE";
 export const ACTOR_MOVIE_ID_CHANGE = "ACTOR_MOVIE_ID_CHANGE";
+export const ACTOR_DATA_REQUESTED = "ACTOR_DATA_REQUESTED";
 
 const BASE_API_URL = "https://localhost:7239/api/Actors";
 
@@ -12,8 +13,12 @@ export const actor_name_change = (payload) => ({
 });
 
 export const actor_movie_id_change = (payload) => ({
-  type: ACTOR_NAME_CHANGE,
+  type: ACTOR_MOVIE_ID_CHANGE,
   payload,
+});
+
+const actor_data_requested = () => ({
+  type: ACTOR_DATA_REQUESTED,
 });
 
 const actor_data_received = (payload) => ({
@@ -23,13 +28,14 @@ const actor_data_received = (payload) => ({
 
 export const actor_get_data = () => {
   return (dispatch) => {
+    dispatch(actor_data_requested());
     axios.get(BASE_API_URL).then((response) => {
       dispatch(actor_data_received(response.data));
     });
   };
 };
 
-export const actor_update_data = () => {
+export const actor_update_data = (body) => {
   return (dispatch, getState) => {
     const state = getState();
     const actor = state.actors.payload;
@@ -38,3 +44,7 @@ export const actor_update_data = () => {
     });
   };
 };
+
+export const actor_delete_data = () => {};
+
+export const actor_add_data = () => {};

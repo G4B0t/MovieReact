@@ -7,12 +7,12 @@ import {
   useReactTable,
   ColumnSizing,
 } from "@tanstack/react-table";
-import {Button} from 'react-bootstrap'; 
+import {Button, Spinner} from 'react-bootstrap'; 
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DebouncedInput from "./DebouncedInput";
 
-const TanStackTable = ({ data, columns, new_data, title }) => {
+const TanStackTable = ({ data, columns, new_data, title, loading, loaded }) => {
   const [globalFilter, setGlobalFilter] = useState("");
 
   const table = useReactTable({
@@ -70,7 +70,13 @@ const TanStackTable = ({ data, columns, new_data, title }) => {
               ))}
             </thead>
             <tbody>
-              {table.getRowModel().rows.length ? (
+              { loading ? (
+                <tr className="text-center h-32">
+                  <td colSpan={12}><Spinner animation="border" role="status"/></td>
+                </tr>
+                ) : ''
+              }
+              {table.getRowModel().rows.length && loaded ? (
                 table.getRowModel().rows.map((row, i) => (
                   <tr
                     key={row.id}
@@ -91,11 +97,12 @@ const TanStackTable = ({ data, columns, new_data, title }) => {
                     ))}
                   </tr>
                 ))
-              ) : (
+              ) : ''}
+              { loaded && !table.getRowModel().rows.length ? (
                 <tr className="text-center h-32">
                   <td colSpan={12}>No Record Found!</td>
                 </tr>
-              )}
+              ) : ''}
             </tbody>
           </table>
         </div>
