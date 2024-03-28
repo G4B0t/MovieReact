@@ -41,10 +41,28 @@ export const actor_update_data = (body) => {
     const actor = state.actors.payload;
     axios.update(BASE_API_URL, actor).then((response) => {
       console.log(response);
+      dispatch(actor_get_data());
     });
   };
 };
 
-export const actor_delete_data = () => {};
+export const actor_delete_data = (body) => {
+  return (dispatch) => {
+    const uri = BASE_API_URL + "/" + body.id;
+    axios.delete(uri).then((response) => {
+      console.log(response);
+      dispatch(actor_get_data());
+    });
+  };
+};
 
-export const actor_add_data = () => {};
+export const actor_add_data = () => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { payload } = state.actor;
+    axios.post(BASE_API_URL, payload).then((response) => {
+      console.log(response);
+      dispatch(actor_get_data());
+    });
+  };
+};
