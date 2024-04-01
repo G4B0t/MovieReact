@@ -42,7 +42,7 @@ const movie_data_received = (data) => ({
 
 export const movie_get_data = () => {
   return (dispatch) => {
-    const uri = BASE_API_URL + "?page=1&pageSize=10000"; // title=Avengers&
+    const uri = BASE_API_URL + "?title=Avengers&page=1&pageSize=10000"; // title=Avengers&
     dispatch(movie_data_requested());
     axios.get(uri).then((response) => {
       dispatch(movie_data_received(response.data.data));

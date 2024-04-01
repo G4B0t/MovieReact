@@ -74,13 +74,13 @@ const Ratings = () => {
             cell: (info) => <span>{info.row.index + 1}</span>,
             header: "#",
         }),
-        columnHelper.accessor("stars", {
-            cell: (info) => <span>{info.getValue()}</span>,
-            header: "Stars",
-        }),
         columnHelper.accessor("movie_title", {
             cell: (info) => <span>{info.getValue()}</span>,
             header: "Movie",
+        }),
+        columnHelper.accessor("stars", {
+            cell: (info) => <span>{info.getValue()}</span>,
+            header: "Stars",
         }),
         columnHelper.accessor("action", {
             cell: (info) => <>

@@ -54,6 +54,7 @@ const rating_reducer = (state = defaultState, action = null) => {
       return {
         ...state,
         isLoaded: true,
+        isLoading: false,
         rating_list: action.payload,
       };
     }
