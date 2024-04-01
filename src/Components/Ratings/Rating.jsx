@@ -62,7 +62,6 @@ const Ratings = () => {
 
     const onUpdate = () => {
         dispatch(rating_update_data(data));
-        dispatch(rating_movie_id_change(data.movieId))
         setBtnName('Save New');
         setData(null);        
         setShow(false);

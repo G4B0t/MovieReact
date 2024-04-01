@@ -51,20 +51,22 @@ export const movie_get_data = () => {
 };
 
 export const movie_update_data = (body) => {
-  return (dispatch) => {
-    const string_names = body.actors.split(",");
+  return (dispatch, getState) => {
+    const state = getState();
+    const movie = state.movie.payload;
+    const string_names = movie.actors.split(",");
     const names = string_names.map((actor) => ({
       name: actor.trim(),
       movieId: body.id,
     }));
     const data = {
       id: body.id,
-      title: body.title,
+      title: movie.title,
       actors: names,
-      releaseDate: body.releaseDate,
+      releaseDate: movie.releaseDate,
       ratings: [
         {
-          stars: body.averageRating,
+          stars: movie.averageRating,
         },
       ],
     };

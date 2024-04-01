@@ -38,8 +38,9 @@ export const rating_get_data = () => {
 export const rating_update_data = (body) => {
   return (dispatch, getState) => {
     const state = getState();
-    const actor = state.actors.payload;
-    axios.update(BASE_API_URL, actor).then((response) => {
+    const rating = state.rating.payload;
+    const uri = BASE_API_URL + "/" + body.id;
+    axios.update(uri, rating).then((response) => {
       console.log(response);
       dispatch(rating_get_data());
     });

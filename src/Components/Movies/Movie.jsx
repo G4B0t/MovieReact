@@ -70,7 +70,11 @@ const Movies = () => {
     }
 
     const updateMovie = (row_id) => {
-        const update_data = movies.find((movie) => movie.id === row_id)
+        const update_data = movies.find((movie) => movie.id === row_id);
+        dispatch(movie_actor_change(update_data.actors));
+        dispatch(movie_title_change(update_data.title));
+        dispatch(movie_releaseDate_change(update_data.releaseDate));
+        dispatch(movie_averageRating_change(update_data.averageRating));
         setData(update_data);
         setBtnName('Save Changes')
         setShow(true);
@@ -168,7 +172,7 @@ const Movies = () => {
                 <Modal.Title>{data !== null ? 'Update ' : 'Create New '} Movie</Modal.Title>
                 </Modal.Header>
                     <Modal.Body>
-                        <MovieModal data={data}/>
+                        <MovieModal/>
                     </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
