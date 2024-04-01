@@ -40,7 +40,7 @@ export const actor_update_data = (body) => {
     const state = getState();
     const actor = state.actor.payload;
     const uri = BASE_API_URL + "/" + body.id;
-    axios.update(uri, actor).then((response) => {
+    axios.put(uri, actor).then((response) => {
       console.log(response);
       dispatch(actor_get_data());
     });
