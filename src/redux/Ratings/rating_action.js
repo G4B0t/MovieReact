@@ -60,7 +60,7 @@ export const rating_delete_data = (body) => {
 export const rating_add_data = () => {
   return (dispatch, getState) => {
     const state = getState();
-    const { payload } = state.actor;
+    const { payload } = state.rating;
     axios.post(BASE_API_URL, payload).then((response) => {
       console.log(response);
       dispatch(rating_get_data());
