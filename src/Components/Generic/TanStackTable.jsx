@@ -8,7 +8,7 @@ import {
   ColumnSizing,
 } from "@tanstack/react-table";
 import {Button, Spinner} from 'react-bootstrap'; 
-import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCircleChevronLeft, faCircleChevronRight, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DebouncedInput from "./DebouncedInput";
 
@@ -112,14 +112,14 @@ const TanStackTable = ({ data, columns, new_data, title, loading, loaded }) => {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            {"<"}
+            <FontAwesomeIcon icon={faCircleChevronLeft}/>
           </button>
           <button
             className="pagination-button"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            {">"}
+            <FontAwesomeIcon icon={faCircleChevronRight} />
           </button>
 
           <div className="pagination-info flex items-center gap-1">
